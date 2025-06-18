@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Resume Builder</title>
+  <link rel="stylesheet" href="Main.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <!-- Left Form Section -->
+    <div class="form-section">
+      <h2>Personal details</h2>
+
+      <label>Job Title</label>
+      <input type="text" id="jobTitle" placeholder="The role you want" />
+
+      <div class="row">
+        <div>
+          <label>First Name</label>
+          <input type="text" id="firstName" />
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input type="text" id="lastName" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Email</label>
+          <input type="email" id="email" />
+        </div>
+        <div>
+          <label>Phone</label>
+          <input type="text" id="phone" />
+        </div>
+      </div>
+
+      <label>Address</label>
+      <input type="text" id="address" />
+
+      <div class="row">
+        <div>
+          <label>City / State</label>
+          <input type="text" id="city" />
+        </div>
+        <div>
+          <label>Country</label>
+          <input type="text" id="country" />
+        </div>
+      </div>
+
+      <h2>Summary</h2>
+      <textarea id="summary" rows="3"></textarea>
+
+      <h2>Skills</h2>
+      <textarea id="skills" rows="3"></textarea>
+
+      <h2>Education</h2>
+      <textarea id="education" rows="3"></textarea>
+
+      <h2>Experience</h2>
+      <textarea id="experience" rows="3"></textarea>
+
+      <h2>Projects</h2>
+      <textarea id="projects" rows="3"></textarea>
+
+      <h2>Certificates</h2>
+      <textarea id="certificates" rows="2"></textarea>
+
+      <h2>Hobbies</h2>
+      <textarea id="hobbies" rows="2"></textarea>
+    </div>
+
+    <!-- Right Preview Section -->
+    <div class="preview-section" id="resumePreview">
+      <h2><span id="previewName"></span>, <span id="previewJob"></span></h2>
+      <p><span id="previewAddress"></span>, <span id="previewCity"></span>, <span id="previewCountry"></span>, <span id="previewPhone"></span>, <span id="previewEmail"></span></p>
+      <hr>
+      <h3>PROFILE</h3>
+      <p id="previewSummary"></p>
+
+      <h3>SKILLS</h3>
+      <p id="previewSkills"></p>
+
+      <h3>EDUCATION</h3>
+      <p id="previewEducation"></p>
+
+      <h3>EXPERIENCE</h3>
+      <p id="previewExperience"></p>
+
+      <h3>PROJECTS</h3>
+      <p id="previewProjects"></p>
+
+      <h3>CERTIFICATES</h3>
+      <p id="previewCertificates"></p>
+
+      <h3>HOBBIES</h3>
+      <p id="previewHobbies"></p>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button id="editButton"></button>
+    <button id="downloadButton"></button>
+</div>
+
+
+  <script src="Main.js"></script>
+</body>
+</html>
