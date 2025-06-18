@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Builder</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="Home.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="left">
+      <strong class="logo">Resume Build</strong>
+      <a href="template.html">Resume</a>
+      <a href="../bar/About.html">About</a>
+      <a href="../bar/learn.html">Learn</a>
+    </div>
+    <div class="right">
+      <a href="../loginandSingup/Login_page.html"><button class="sign-in">Sign In</button></a>
+      <a href="../loginandSingup/New_user.html"><button class="get-started">Get Started</button></a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Resume Builder <span>Builds</span><br/> helps you get hired at top companies</h1>
+      <div class="hero-buttons">
+        <a href="template.html"><button class="build">Build Your Resume</button></a>
+      </div>
+      <div class="brands">
+        Make Resume like this:
+        <br/>
+        <img src="../Photos/google.png" alt="Google">
+        <img src="../Photos/social (1).png" alt="Logo">
+        <img src="../Photos/meta.png" alt="Meta">
+        <img src="../Photos/social.png" alt="Logo">
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <div class="flip-container">
+        <div class="card">
+          <div class="card-side front">
+            <img src="../Photos/restaurent.png" alt="Front Resume">
+          </div>
+          <div class="card-side back">
+            <img src="../Photos/Business-Analyst.png" alt="Back Resume">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="corve">
+  <!-- Template Section -->
+   <span>Resume Templates</span>
+  <h2 class="choice">Pick a resume template and build your resume in minutes!</h2>
+  <div class="scroll-container-wrapper">
+    <button class="scroll-arrow left" onclick="scrollLeft()">&#10094;</button>
+    <div class="scroll-container" id="scrollRow">
+      <img src="../Photos/Business-Analyst.png" alt="Business Analyst Resume" />
+      <img src="../Photos/Doctor-Resume.png" alt="Doctor Resume" />
+      <img src="../Photos/Primary-Teacher.png" alt="Teacher Resume" />
+      <img src="../Photos/restaurent.png" alt="Restaurant Resume" />
+      <img src="../Photos/sales-resume.png" alt="Sales Resume" />
+    </div>
+    <button class="scroll-arrow right" onclick="scrollRight()">&#10095;</button>
+  </div>
+</section>
+  <!-- Footer -->
+
+
+  
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>Resume Builder</h3>
+        <p>Build beautiful, job-winning resumes in minutes.</p>
+      </div>
+      <div class="footer-section links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Resume Templates</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Learn More</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+        </ul>
+      </div>
+      <div class="footer-section contact">
+        <h4>Contact Us</h4>
+        <p>Email: rowin9759@gmail.com</p>
+        <p>Phone: +91-10000000</p>
+        <div class="socials">
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Resume Builder. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function scrollLeft() {
+      document.getElementById('scrollRow').scrollBy({ left: -300, behavior: 'smooth' });
+    }
+    function scrollRight() {
+      document.getElementById('scrollRow').scrollBy({ left: 300, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
