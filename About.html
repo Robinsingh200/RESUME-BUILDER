@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Resume Build</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../NeW/Home.css">
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #deece7;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ----------- NAVBAR ----------- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 50px;
+      background: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid #00c08b;
+    }
+
+    .navbar .left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .navbar .left div,
+    .navbar .left strong {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .navbar .left div:hover,
+    .navbar .left strong:hover {
+      color: #00c08b;
+    }
+
+    .navbar .right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .navbar .right button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .sign-in {
+      background: transparent;
+      color: #00c08b;
+      border: 2px solid #00c08b;
+    }
+
+    .sign-in:hover {
+      background-color: #00c08b;
+      color: #fff;
+    }
+
+    .get-started {
+      background: #00c08b;
+      color: #fff;
+    }
+
+    .get-started:hover {
+      background-color: #029f71;
+    }
+
+    /* ----------- ABOUT SECTION ----------- */
+    .about {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 50px;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      color: #333;
+    }
+
+    .about h2 {
+      font-size: 36px;
+      color: #00c08b;
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .about h2::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background-color: #5e3bee;
+      border-radius: 2px;
+    }
+
+    .about p {
+      font-size: 17px;
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    .about p strong {
+      color: #00c08b;
+    }
+
+    .about ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .about ul li {
+      font-size: 16px;
+      margin-bottom: 12px;
+      padding-left: 30px;
+      position: relative;
+    }
+
+    .about ul li::before {
+      content: "\f058";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: #00c08b;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    /* ----------- CTA BUTTON ----------- */
+    .cta-button {
+      display: inline-block;
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: 600;
+      background: linear-gradient(45deg, #956b50, #7c724a);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: block;
+      margin: 40px auto 0 auto;
+      text-align: center;
+    }
+
+    .cta-button:hover {
+      background: linear-gradient(45deg, #b2a87e, #ff6600);
+      transform: scale(1.05);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+      box-shadow: 0 15px 40px rgba(255, 102, 0, 0.4);
+    }
+
+    .cta-button:focus {
+      outline: none;
+      box-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
+      border: 2px solid #ff6600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <div class="left">
+      <strong>Resume Build</strong>
+      <div onclick="location.href='#'">Resume</div>
+      <div onclick="location.href='About.html'">About</div>
+      <div onclick="location.href='#learn'">Learn</div>
+    </div>
+    <div class="right">
+      <a href="../loginandSingup/Login_page.html"><button class="sign-in">Sign in</button></a>
+      <a href="../loginandSingup/New_user.html"><button class="get-started">Get Started</button></a>
+    </div>
+  </div>
+
+  <section class="about">
+    <h2>About Resume Build</h2>
+    <p>Resume Build is a free, easy-to-use platform designed to help you create high-quality resumes. Whether you're looking for your first job or changing careers, we provide simple tools and templates to help you stand out to employers.</p>
+
+    <p><strong>Here's how you can get started:</strong></p>
+    <ul>
+      <li>Fill in your personal information such as name, contact details, and career objective.</li>
+      <li>Enter your work experience, education, and relevant skills.</li>
+      <li>Choose from our wide range of modern templates to make your resume shine.</li>
+      <li>Download your resume in multiple formats and start applying to your dream jobs!</li>
+    </ul>
+
+    <p>Ready to create a standout resume? Start by filling in your details in the sections below, and we’ll help you craft a professional resume in no time.</p>
+
+    <a href="About.html" class="cta-button">Learn More</a>
+  </section>
+
+
+   
+  <footer class="footer">
+    <div class="footer-content">
+    
+      <div class="footer-section links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Resume Templates</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Learn More</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-section contact">
+        <h4>Contact Us</h4>
+        <p>Email: rowin9759@gmail.com</p>
+        <p>Phone: +91-10000000</p>
+        <div class="socials">
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Resume Builder. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
