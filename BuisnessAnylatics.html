@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Professional Resume Builder</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    .form-side {
+      width: 35%;
+      padding: 20px;
+      background-color: #f0f0f0;
+      overflow-y: auto;
+    }
+
+    .form-side input, .form-side textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+
+    .resume-preview {
+      width: 65%;
+      padding: 20px;
+      background-color: #eaeaea;
+      overflow-y: auto;
+    }
+
+    .resume {
+      background: white;
+      max-width: 850px;
+      margin: auto;
+      padding: 30px;
+      color: #333;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #005b7f;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .top-bar h1 {
+      color: #0077b6;
+      font-size: 28px;
+      margin: 0;
+    }
+
+    .top-bar p {
+      font-size: 14px;
+      color: #666;
+      letter-spacing: 1px;
+    }
+
+    .profile-pic {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+    }
+
+    .two-columns {
+      display: flex;
+      gap: 30px;
+    }
+
+    .left-col {
+      width: 35%;
+      border-right: 1px solid #ccc;
+      padding-right: 20px;
+    }
+
+    .right-col {
+      width: 65%;
+      padding-left: 20px;
+    }
+
+    .left-col h3, .right-col h3 {
+      color: #0077b6;
+      margin-top: 20px;
+      font-size: 16px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-side">
+    <h2>Fill Details</h2>
+    <label>Upload Photo:
+                <input type="file" id="photoInput" accept="image/*" />
+            </label>
+
+    <label>Full Name</label><input type="text" id="name">
+    <label>Job Title</label><input type="text" id="title">
+    <label>Email</label><input type="email" id="email">
+    <label>Phone</label><input type="text" id="phone">
+    <label>Skills (comma separated)</label><input type="text" id="skills">
+    <label>Experience</label><textarea id="experience"></textarea>
+    <label>Education</label><textarea id="education"></textarea>
+    <label>Awards</label><textarea id="awards"></textarea>
+    <label>Summary</label><textarea id="summary"></textarea>
+    <label>Project Title</label><input type="text" id="projectTitle">
+    <label>Project Role</label><input type="text" id="projectRole">
+    <label>Project Date</label><input type="text" id="projectDate">
+    <label>Project Description</label><textarea id="projectDesc"></textarea>
+    <br><br>
+    <button onclick="generatePDF()">Download PDF</button>
+  </div>
+
+  <div class="resume-preview" id="resume">
+    <div class="resume" id="resumeContent">
+      <div class="top-bar">
+        <div>
+          <h1 id="outName">Your Name</h1>
+          <p id="outTitle">Job Title</p>
+        </div>
+        <img src="https://via.placeholder.com/100" alt="Photo" class="profile-pic">
+      </div>
+
+      <div class="two-columns">
+        <div class="left-col">
+          <h3>Contact</h3>
+          <p id="outEmail">Email</p>
+          <p id="outPhone">Phone</p>
+
+          <h3>Skills</h3>
+          <p id="outSkills">-</p>
+
+          <h3>Experience</h3>
+          <p id="outExperience">-</p>
+
+          <h3>Education</h3>
+          <p id="outEducation">-</p>
+
+          <h3>Awards</h3>
+          <p id="outAwards">-</p>
+        </div>
+        <div class="right-col">
+          <h3>Summary</h3>
+          <p id="outSummary">-</p>
+
+          <h3>Selected Projects</h3>
+          <p><strong id="outProjectTitle"></strong> – <span id="outProjectRole"></span> (<span id="outProjectDate"></span>)</p>
+          <p id="outProjectDesc">-</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sync = (inputId, outputId) => {
+      document.getElementById(inputId).addEventListener("input", e => {
+        document.getElementById(outputId).textContent = e.target.value;
+      });
+    };
+
+    sync("name", "outName");
+    sync("title", "outTitle");
+    sync("email", "outEmail");
+    sync("phone", "outPhone");
+    sync("experience", "outExperience");
+    sync("education", "outEducation");
+    sync("awards", "outAwards");
+    sync("summary", "outSummary");
+    sync("projectTitle", "outProjectTitle");
+    sync("projectRole", "outProjectRole");
+    sync("projectDate", "outProjectDate");
+    sync("projectDesc", "outProjectDesc");
+
+    document.getElementById("skills").addEventListener("input", e => {
+      const skills = e.target.value.split(',').map(s => s.trim()).filter(Boolean);
+      document.getElementById("outSkills").innerHTML = skills.map(skill => `• ${skill}`).join('<br>');
+    });
+
+    function generatePDF() {
+      const resume = document.getElementById("resumeContent");
+      html2canvas(resume, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jspdf.jsPDF("p", "pt", "a4");
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
+        const finalWidth = imgWidth * ratio;
+        const finalHeight = imgHeight * ratio;
+        const x = (pageWidth - finalWidth) / 2;
+        const y = 20;
+        pdf.addImage(imgData, "PNG", x, y, finalWidth, finalHeight);
+        pdf.save("resume.pdf");
+      });
+    }
+
+  // Existing sync functions ...
+
+  // Profile photo upload and preview
+  document.getElementById('photoInput').addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        document.querySelector('.profile-pic').src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+
+  </script>
+
+</body>
+</html>
