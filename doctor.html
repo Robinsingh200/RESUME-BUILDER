@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <title>Medical Resume Builder</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f2f2f2;
+    }
+
+    .container {
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .form-section {
+      width: 35%;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+
+    .form-section input,
+    .form-section textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .preview-section {
+      width: 65%;
+      padding: 0;
+      background: white;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #resume {
+      display: flex;
+      width: 100%;
+      max-width: 794px; /* A4 size in px at 96 DPI */
+      margin: auto;
+    }
+
+    .left-column {
+      width: 35%;
+      background: #3a5a80;
+      color: white;
+      padding: 20px;
+    }
+
+    .right-column {
+      width: 65%;
+      padding: 20px;
+    }
+
+    .profile-photo {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid white;
+      margin-bottom: 10px;
+    }
+
+    h1, h2, h3 {
+      margin: 5px 0;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #3a5a80;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2e4763;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Input Form -->
+    <div class="form-section">
+      <h2>Enter Resume Details</h2>
+      <input type="file" id="photoUpload">
+      <input type="text" id="nameInput" placeholder="Full Name">
+      <input type="text" id="degreeInput" placeholder="Degrees (e.g., MBBS, MS)">
+      <input type="text" id="contactInput" placeholder="Contact Info">
+      <textarea id="objectiveInput" placeholder="Career Objective"></textarea>
+      <textarea id="experienceInput" placeholder="Work Experience"></textarea>
+      <textarea id="educationInput" placeholder="Education"></textarea>
+      <textarea id="certificationInput" placeholder="Certifications"></textarea>
+      <textarea id="languagesInput" placeholder="Languages"></textarea>
+      <textarea id="awardsInput" placeholder="Awards"></textarea>
+      <textarea id="conferencesInput" placeholder="Conferences Attended"></textarea>
+      <textarea id="membershipsInput" placeholder="Memberships"></textarea>
+      <textarea id="publicationsInput" placeholder="Publications"></textarea>
+      <button onclick="downloadPDF()">Download PDF</button>
+    </div>
+
+    <!-- Resume Preview -->
+    <div class="preview-section">
+      <div id="resume">
+        <div class="left-column">
+          <img id="photoPreview" class="profile-photo" src="https://via.placeholder.com/100" alt="Profile Photo">
+          <div class="section">
+            <h3>Certifications</h3>
+            <p id="certificationPreview"></p>
+          </div>
+          <div class="section">
+            <h3>Languages</h3>
+            <p id="languagesPreview"></p>
+          </div>
+        </div>
+        <div class="right-column">
+          <h1 id="namePreview">Full Name</h1>
+          <h2 id="degreePreview">Degree</h2>
+          <p id="contactPreview">Contact Info</p>
+          <div class="section">
+            <h3>Career Objective</h3>
+            <p id="objectivePreview"></p>
+          </div>
+          <div class="section">
+            <h3>Work Experience</h3>
+            <p id="experiencePreview"></p>
+          </div>
+          <div class="section">
+            <h3>Education</h3>
+            <p id="educationPreview"></p>
+          </div>
+          <div class="section">
+            <h3>Awards</h3>
+            <p id="awardsPreview"></p>
+          </div>
+          <div class="section">
+            <h3>Conferences</h3>
+            <p id="conferencesPreview"></p>
+          </div>
+          <div class="section">
+            <h3>Memberships</h3>
+            <p id="membershipsPreview"></p>
+          </div>
+          <div class="section">
+            <h3>Publications</h3>
+            <p id="publicationsPreview"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bindText = (inputId, previewId) => {
+      document.getElementById(inputId).addEventListener("input", function () {
+        document.getElementById(previewId).textContent = this.value;
+      });
+    };
+
+    const fields = [
+      ["nameInput", "namePreview"],
+      ["degreeInput", "degreePreview"],
+      ["contactInput", "contactPreview"],
+      ["objectiveInput", "objectivePreview"],
+      ["experienceInput", "experiencePreview"],
+      ["educationInput", "educationPreview"],
+      ["certificationInput", "certificationPreview"],
+      ["languagesInput", "languagesPreview"],
+      ["awardsInput", "awardsPreview"],
+      ["conferencesInput", "conferencesPreview"],
+      ["membershipsInput", "membershipsPreview"],
+      ["publicationsInput", "publicationsPreview"]
+    ];
+
+    fields.forEach(([input, preview]) => bindText(input, preview));
+
+    document.getElementById("photoUpload").addEventListener("change", function (e) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        document.getElementById("photoPreview").src = event.target.result;
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    });
+
+    function downloadPDF() {
+      const element = document.getElementById("resume");
+
+      const opt = {
+        margin: 0,
+        filename: 'resume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+          scale: 2,
+          scrollY: 0,
+          useCORS: true
+        },
+        jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dynamic Resume Builder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- html2pdf for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .input-area, .resume-container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      box-sizing: border-box;
+    }
+    .input-area {
+      width: 100%;
+      max-width: 450px;
+    }
+    .resume-container {
+      width: 100%;
+      max-width: 800px;
+      padding: 0;
+      overflow: hidden;
+    }
+    .preview-header {
+      background-color: #0d8366;
+      color: #ffffff;
+      padding: 40px 30px;
+      text-align: center;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    .preview-content {
+      padding: 30px;
+    }
+    .section-title {
+      color: #0d8366;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 1.25rem;
+    }
+    .label-group {
+      margin-bottom: 15px;
+    }
+    .label-key {
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 5px;
+      display: block;
+    }
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cbd5e0;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    textarea.input-field {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .preview-text {
+      color: #2d3748;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    @media (max-width: 1200px) {
+      body {
+        flex-direction: column;
+        align-items: center;
+      }
+      .input-area, .resume-container {
+        max-width: 700px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Input Form -->
+  <div class="input-area">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Fill Resume Details</h2>
+
+    <!-- Input Fields -->
+    <div class="label-group">
+      <label for="liveFullNameInput" class="label-key">Full Name:</label>
+      <input type="text" id="liveFullNameInput" class="input-field" placeholder="Nayomi Gall">
+    </div>
+    <div class="label-group">
+      <label for="liveTitleInput" class="label-key">Title:</label>
+      <input type="text" id="liveTitleInput" class="input-field" placeholder="Primary Teacher">
+    </div>
+    <div class="label-group">
+      <label for="liveCareerObjectiveInput" class="label-key">Career Objective:</label>
+      <textarea id="liveCareerObjectiveInput" class="input-field" placeholder="Seeking a challenging position..."></textarea>
+    </div>
+    <div class="label-group">
+      <label for="liveAboutMeInput" class="label-key">About Me:</label>
+      <textarea id="liveAboutMeInput" class="input-field" placeholder="Passionate and dedicated professional..."></textarea>
+    </div>
+    <div class="label-group">
+      <label for="liveAcademicBackgroundInput" class="label-key">Academic Background:</label>
+      <textarea id="liveAcademicBackgroundInput" class="input-field" placeholder="Bachelor of Education, University Name (Year)..."></textarea>
+    </div>
+    <div class="label-group">
+      <label for="liveExperienceInput" class="label-key">Experience:</label>
+      <textarea id="liveExperienceInput" class="input-field" placeholder="Company Name, Role, Dates, Responsibilities..."></textarea>
+    </div>
+    <div class="label-group">
+      <label for="liveSkillsInput" class="label-key">Skills (comma separated):</label>
+      <textarea id="liveSkillsInput" class="input-field" placeholder="Communication, Teamwork, Problem-solving"></textarea>
+    </div>
+    <div class="label-group">
+      <label for="liveLanguagesInput" class="label-key">Languages (comma separated):</label>
+      <textarea id="liveLanguagesInput" class="input-field" placeholder="English, Spanish, French"></textarea>
+    </div>
+    <div class="label-group">
+      <label for="liveInterestsInput" class="label-key">Interests (comma separated):</label>
+      <textarea id="liveInterestsInput" class="input-field" placeholder="Reading, Hiking, Photography"></textarea>
+    </div>
+
+    <button onclick="downloadResume()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded mt-4">
+      Download Resume as PDF
+    </button>
+  </div>
+
+  <!-- Resume Preview -->
+  <div class="resume-container" id="resumePreview">
+    <header class="preview-header">
+      <h1 class="text-4xl font-bold mb-2" id="yourNameLabel">Your Name</h1>
+      <p class="text-2xl" id="yourTitleLabel">Your Title</p>
+    </header>
+
+    <div class="preview-content">
+      <section class="mb-6">
+        <h2 class="section-title">Career Objective</h2>
+        <p class="preview-text" id="careerObjectiveLabel"></p>
+      </section>
+      <section class="mb-6">
+        <h2 class="section-title">About Me</h2>
+        <p class="preview-text" id="aboutMeLabel"></p>
+      </section>
+      <section class="mb-6">
+        <h2 class="section-title">Academic Background</h2>
+        <p class="preview-text" id="academicBackgroundLabel"></p>
+      </section>
+      <section class="mb-6">
+        <h2 class="section-title">Experiences</h2>
+        <p class="preview-text" id="experienceLabel"></p>
+      </section>
+      <section class="flex flex-wrap justify-between gap-y-6 mb-6">
+        <div class="w-full md:w-1/3 pr-2">
+          <h2 class="section-title">Skills</h2>
+          <p class="preview-text" id="skillsLabel"></p>
+        </div>
+        <div class="w-full md:w-1/3 px-2">
+          <h2 class="section-title">Languages</h2>
+          <p class="preview-text" id="languagesLabel"></p>
+        </div>
+        <div class="w-full md:w-1/3 pl-2">
+          <h2 class="section-title">Interests</h2>
+          <p class="preview-text" id="interestsLabel"></p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // Live update labels
+    function updateLabel(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    function bindInput(idInput, idLabel) {
+      document.getElementById(idInput).addEventListener("input", function (e) {
+        updateLabel(idLabel, e.target.value);
+      });
+    }
+
+    // Bind fields
+    window.addEventListener("DOMContentLoaded", function () {
+      const data = {
+        liveFullNameInput: "yourNameLabel",
+        liveTitleInput: "yourTitleLabel",
+        liveCareerObjectiveInput: "careerObjectiveLabel",
+        liveAboutMeInput: "aboutMeLabel",
+        liveAcademicBackgroundInput: "academicBackgroundLabel",
+        liveExperienceInput: "experienceLabel",
+        liveSkillsInput: "skillsLabel",
+        liveLanguagesInput: "languagesLabel",
+        liveInterestsInput: "interestsLabel",
+      };
+      Object.entries(data).forEach(([inputId, labelId]) => {
+        bindInput(inputId, labelId);
+        updateLabel(labelId, document.getElementById(inputId).value); // default init
+      });
+    });
+
+    // Download function
+    function downloadResume() {
+      const resume = document.getElementById("resumePreview");
+      html2pdf().from(resume).set({
+        margin: 0,
+        filename: 'resume.pdf',
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      }).save();
+    }
+  </script>
+</body>
+</html>

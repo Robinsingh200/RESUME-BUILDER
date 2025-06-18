@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Builder</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+    .form-side {
+      width: 40%;
+      padding: 20px;
+      background-color: #f0f0f0;
+      overflow-y: auto;
+    }
+    .resume-preview {
+      width: 60%;
+      padding: 30px;
+      background-color: #fff;
+      overflow-y: auto;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 15px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .resume {
+      max-width: 800px;
+      margin: auto;
+      font-size: 14px;
+      color: #333;
+    }
+    .header {
+      background: #eaeaea;
+      padding: 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .resume h2 {
+      text-align: center;
+      margin-top: 15px;
+      color: #444;
+    }
+    .section {
+      margin-top: 20px;
+    }
+    .section h3 {
+      margin-bottom: 5px;
+      background-color: #f4f4f4;
+      padding: 8px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-side">
+    <h2>Resume Form</h2>
+    <label>Full Name</label>
+    <input id="name">
+
+    <label>Phone</label>
+    <input id="phone">
+
+    <label>Email</label>
+    <input id="email">
+
+    <label>LinkedIn</label>
+    <input id="linkedin">
+
+    <label>Career Objective</label>
+    <textarea id="objective"></textarea>
+
+    <label>Experience 1 Role</label>
+    <input id="exp1role">
+
+    <label>Company & Location</label>
+    <input id="exp1company">
+
+    <label>Date</label>
+    <input id="exp1date">
+
+    <label>Experience Description (each bullet on new line)</label>
+    <textarea id="exp1desc"></textarea>
+
+    <label>Experience 2 Role</label>
+    <input id="exp2role">
+
+    <label>Company & Location</label>
+    <input id="exp2company">
+
+    <label>Date</label>
+    <input id="exp2date">
+
+    <label>Experience Description (each bullet on new line)</label>
+    <textarea id="exp2desc"></textarea>
+
+    <label>Education</label>
+    <input id="education">
+
+    <label>Degree</label>
+    <input id="degree">
+
+    <label>Skills (comma separated)</label>
+    <input id="skills">
+
+    <button onclick="generatePDF()">Download PDF</button>
+  </div>
+
+  <div class="resume-preview" id="resume">
+    <div class="resume">
+      <div class="header">
+        <h1 id="outName">ENTRY LEVEL SALES RESUME</h1>
+        <p>Example by Resume Genius</p>
+      </div>
+
+      <div class="section">
+        <h3>CAREER OBJECTIVE</h3>
+        <p id="outObjective"></p>
+      </div>
+
+      <div class="section">
+        <h3>PROFESSIONAL EXPERIENCE</h3>
+        <p><strong id="outExp1Role"></strong><br>
+        <span id="outExp1Company"></span> | <span id="outExp1Date"></span></p>
+        <ul id="outExp1Desc"></ul>
+
+        <p><strong id="outExp2Role"></strong><br>
+        <span id="outExp2Company"></span> | <span id="outExp2Date"></span></p>
+        <ul id="outExp2Desc"></ul>
+      </div>
+
+      <div class="section">
+        <h3>EDUCATION</h3>
+        <p id="outEducation"></p>
+        <p><i id="outDegree"></i></p>
+      </div>
+
+      <div class="section">
+        <h3>CONTACT</h3>
+        <p><strong>Phone:</strong> <span id="outPhone"></span></p>
+        <p><strong>Email:</strong> <span id="outEmail"></span></p>
+        <p><strong>LinkedIn:</strong> <span id="outLinkedin"></span></p>
+      </div>
+
+      <div class="section">
+        <h3>RELEVANT SKILLS</h3>
+        <ul id="outSkills"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bind = (inputId, outputId) => {
+      document.getElementById(inputId).addEventListener("input", e => {
+        document.getElementById(outputId).textContent = e.target.value;
+      });
+    };
+
+    // Simple binders
+    bind("name", "outName");
+    bind("phone", "outPhone");
+    bind("email", "outEmail");
+    bind("linkedin", "outLinkedin");
+    bind("objective", "outObjective");
+    bind("exp1role", "outExp1Role");
+    bind("exp1company", "outExp1Company");
+    bind("exp1date", "outExp1Date");
+    bind("exp2role", "outExp2Role");
+    bind("exp2company", "outExp2Company");
+    bind("exp2date", "outExp2Date");
+    bind("education", "outEducation");
+    bind("degree", "outDegree");
+
+    // Experience descriptions (as bullet points)
+    document.getElementById("exp1desc").addEventListener("input", e => {
+      const bullets = e.target.value.split('\n').filter(Boolean);
+      document.getElementById("outExp1Desc").innerHTML = bullets.map(b => `<li>${b}</li>`).join('');
+    });
+
+    document.getElementById("exp2desc").addEventListener("input", e => {
+      const bullets = e.target.value.split('\n').filter(Boolean);
+      document.getElementById("outExp2Desc").innerHTML = bullets.map(b => `<li>${b}</li>`).join('');
+    });
+
+    // Skills list
+    document.getElementById("skills").addEventListener("input", e => {
+      const skills = e.target.value.split(',').map(s => s.trim()).filter(Boolean);
+      document.getElementById("outSkills").innerHTML = skills.map(s => `<li>${s}</li>`).join('');
+    });
+
+    function generatePDF() {
+      const resume = document.getElementById("resume");
+      html2canvas(resume).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jspdf.jsPDF("p", "mm", "a4");
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const ratio = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
+        const imgWidth = canvas.width * ratio;
+        const imgHeight = canvas.height * ratio;
+        pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        pdf.save("resume.pdf");
+      });
+    }
+  </script>
+</body>
+</html>

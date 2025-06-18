@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <title>Chef Resume Builder</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #fff8f1;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .form-section {
+        width: 35%;
+        background: #ffffff;
+        padding: 20px 25px;
+        border-radius: 8px;
+        height: 100vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-section h2,
+    .form-section h3 {
+        color: #ff9900;
+        border-bottom: 2px solid #ffcc66;
+        padding-bottom: 5px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .form-section label {
+        display: block;
+        margin-bottom: 12px;
+        font-weight: bold;
+        color: #444;
+    }
+
+    .form-section input,
+    .form-section textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        font-size: 14px;
+        background: #fdfdfd;
+    }
+
+    .form-section textarea {
+        resize: vertical;
+        height: 80px;
+    }
+
+    button {
+        padding: 10px 16px;
+        background-color: #ffa500;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+
+    button:hover {
+        background-color: #ff8800;
+    }
+
+    .preview-section {
+        width: 65%;
+        display: flex;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 5px gray;
+    }
+
+    .left-column {
+        width: 30%;
+        background: #2e2e2e;
+        color: #ffcc66;
+        padding: 20px;
+        border-radius: 8px 0 0 8px;
+        text-align: center;
+    }
+
+    .profile-photo {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 10px;
+        border: 4px solid #ffcc66;
+    }
+
+    .left-column h3 {
+        margin-top: 20px;
+        color: #ffcc66;
+        font-size: 1.1em;
+        border-bottom: 1px solid #ffcc66;
+        padding-bottom: 5px;
+    }
+
+    .left-column ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .left-column ul li {
+        margin: 8px 0;
+        font-size: 14px;
+    }
+
+    .right-column {
+        width: 70%;
+        padding: 0 20px;
+        background: #fff;
+    }
+
+    .right-column h1 {
+        color: #ffa500;
+        font-size: 2em;
+        margin-bottom: 0;
+    }
+
+    .right-column h2 {
+        margin-top: 0;
+        font-weight: normal;
+        font-size: 1.2em;
+        color: #444;
+    }
+
+    .section {
+        margin-top: 20px;
+    }
+
+    .section h3 {
+        border-left: 5px solid #ffcc66;
+        padding-left: 10px;
+        font-size: 1.2em;
+        color: #444;
+        margin-bottom: 8px;
+    }
+
+    .section p,
+    .section li {
+        color: #333;
+        font-size: 14px;
+        margin: 5px 0;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <!-- Left: Form Section -->
+        <div class="form-section">
+
+            <h2>Edit Resume</h2>
+            <label>Upload Photo:
+                <input type="file" id="photoInput" accept="image/*" />
+            </label>
+
+            <label>Full Name: <input type="text" id="fullName" /></label>
+            <label>Title: <input type="text" id="jobTitle" /></label>
+            <label>About Me: <textarea id="aboutMe"></textarea></label>
+
+
+            <label>Phone: <input type="text" id="phone" /></label>
+            <label>Email: <input type="text" id="email" /></label>
+            <label>Website: <input type="text" id="website" /></label>
+            <label>Address: <input type="text" id="address" /></label>
+
+            <label>Skills (comma separated): <input type="text" id="skills" /></label>
+
+            <h3>Education</h3>
+            <label>University: <input type="text" id="university" /></label>
+            <label>Degree: <input type="text" id="degree" /></label>
+            <label>GPA: <input type="text" id="gpa" /></label>
+            <label>Years: <input type="text" id="eduYears" /></label>
+
+            <h3>Experience</h3>
+            <label>Company 1: <input type="text" id="company1" /></label>
+            <label>Role 1: <input type="text" id="role1" /></label>
+            <label>Years 1: <input type="text" id="years1" /></label>
+            <label>Details 1: <textarea id="details1"></textarea></label>
+
+            <label>Company 2: <input type="text" id="company2" /></label>
+            <label>Role 2: <input type="text" id="role2" /></label>
+            <label>Years 2: <input type="text" id="years2" /></label>
+            <label>Details 2: <textarea id="details2"></textarea></label>
+
+            <button onclick="downloadPDF()">Download Resume PDF</button>
+
+        </div>
+
+        <!-- Right: Resume Preview -->
+        <div class="preview-section" id="resume">
+            <div class="left-column">
+                <img id="profilePhotoPreview" class="profile-photo" src="https://via.placeholder.com/120"
+                    alt="Profile Photo" />
+                <h3>Skills</h3>
+                <ul id="previewSkills"></ul>
+                <h3>Contact</h3>
+                <p id="previewPhone"></p>
+                <p id="previewEmail"></p>
+                <p id="previewWebsite"></p>
+                <p id="previewAddress"></p>
+            </div>
+            <div class="right-column">
+                <h1 id="previewName">Phyllis Schwaiger</h1>
+                <h2 id="previewTitle">Chef</h2>
+
+                <div class="section">
+                    <h3>About Me</h3>
+                    <p id="previewAbout">Professional, experienced chef...</p>
+                </div>
+
+                <div class="section">
+                    <h3>Education</h3>
+                    <p><strong id="previewUniversity">Borcelle University</strong> <span
+                            id="previewEduYears">(2009-2013)</span></p>
+                    <p><em id="previewDegree">Bachelor of Food Studies</em></p>
+                    <p>GPA: <span id="previewGPA">3.57</span></p>
+                </div>
+
+                <div class="section">
+                    <h3>Experiences</h3>
+                    <p><strong id="previewCompany1">RIMBERIOFRADEL...</strong> <span id="previewYears1"></span><br />
+                        <em id="previewRole1">Sous Chef</em>
+                    </p>
+                    <ul id="previewDetails1"></ul>
+
+                    <p><strong id="previewCompany2">WARDIERE INC.</strong> <span
+                            id="previewYears2">(2025-NOW)</span><br />
+                        <em id="previewRole2">Chef</em>
+                    </p>
+                    <ul id="previewDetails2"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Helper to link inputs to preview elements
+        function bindInput(inputId, previewId, transform = (val) => val) {
+            document.getElementById(inputId).addEventListener("input", function () {
+                document.getElementById(previewId).innerHTML = transform(this.value);
+            });
+        }
+
+        // Simple text mappings
+        bindInput("fullName", "previewName");
+        bindInput("jobTitle", "previewTitle");
+        bindInput("aboutMe", "previewAbout");
+        bindInput("phone", "previewPhone");
+        bindInput("email", "previewEmail");
+        bindInput("website", "previewWebsite");
+        bindInput("address", "previewAddress");
+        bindInput("university", "previewUniversity");
+        bindInput("degree", "previewDegree");
+        bindInput("gpa", "previewGPA");
+        bindInput("eduYears", "previewEduYears", val => `(${val})`);
+        bindInput("company1", "previewCompany1");
+        bindInput("role1", "previewRole1");
+        bindInput("years1", "previewYears1", val => `(${val})`);
+        bindInput("company2", "previewCompany2");
+        bindInput("role2", "previewRole2");
+        bindInput("years2", "previewYears2", val => `(${val})`);
+
+        // Skills as <li>
+        document.getElementById("skills").addEventListener("input", function () {
+            const skillsArray = this.value.split(",").map(s => `<li>${s.trim()}</li>`).join("");
+            document.getElementById("previewSkills").innerHTML = skillsArray;
+        });
+
+        // Experience bullet points
+        document.getElementById("details1").addEventListener("input", function () {
+            const lines = this.value.split("\n").map(line => `<li>${line.trim()}</li>`).join("");
+            document.getElementById("previewDetails1").innerHTML = lines;
+        });
+
+        document.getElementById("details2").addEventListener("input", function () {
+            const lines = this.value.split("\n").map(line => `<li>${line.trim()}</li>`).join("");
+            document.getElementById("previewDetails2").innerHTML = lines;
+        });
+
+        document.getElementById('photoInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profilePhotoPreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+function downloadPDF() {
+  const element = document.getElementById("resume");
+
+  const opt = {
+    margin: [0.2, 0.2, 0.2, 0.2], // top, left, bottom, right (in inches)
+    filename: 'resume.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      scrollY: 0,
+      useCORS: true,
+      backgroundColor: null,
+    },
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save();
+}
+
+
+
+    </script>
+</body>
+
+</html>
