@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Templates</title>
+  <link rel="stylesheet" href="Home.css" />
+
+  <link rel="stylesheet" href="template.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar .left, .navbar .right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .navbar a, .navbar div {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .navbar button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .sign-in {
+      background-color: transparent;
+      color: #00c08b;
+      border: 2px solid #00c08b;
+    }
+
+    .get-started {
+      background-color: #00c08b;
+      color: #fff;
+    }
+
+    .resumeBuilds {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .resumeBuilds span {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #00c08b;
+    }
+
+    .resumeBuilds p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .Temps {
+      display: flex;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .Resumetemps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .Resumetemps img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .Resumetemps img:hover {
+      transform: scale(1.05);
+    }
+
+    .footer {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 2rem;
+    }
+
+    .footer-section h3, .footer-section h4 {
+      margin-bottom: 1rem;
+    }
+
+    .footer-section p, .footer-section ul, .footer-section a {
+      color: #bdc3c7;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .socials a {
+      color: #ecf0f1;
+      margin-right: 10px;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .socials a:hover {
+      color: #00c08b;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid #34495e;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="left">
+      <strong style="font-size: 22px; color: #00c08b;">Resume Build</strong>
+     
+    </div>
+    <div class="right">
+      <a href="../loginandSingup/Login_page.html"><button class="sign-in">Sign in</button></a>
+      <a href="../loginandSingup/New_user.html"><button class="get-started">Get Started</button></a>
+    </div>
+  </div>
+
+  <!-- Resume Templates Header -->
+  <div class="resumeBuilds">
+    <span>Resume Templates</span>
+    <p>Pick a resume template and build your resume in minutes!</p>
+  </div>
+
+  <!-- Resume Cards -->
+   <section class="corve">
+  <div class="Temps">
+    <div class="Resumetemps">
+      <a href="../Template/BuisnessAnylatics.html"><img src="../Photos/Business-Analyst.png" alt="Business Analyst Resume" /></a>
+      <a href="../Template/doctor.html"><img src="../Photos/Doctor-Resume.png" alt="Doctor Resume" /></a>
+      <a href="../Template/Techers.html"><img src="../Photos/Primary-Teacher.png" alt="Teacher Resume" /></a>
+      <a href="../Template/chef.html"><img src="../Photos/restaurent.png" alt="Restaurant Resume" /></a>
+      <a href="../Template/salesMan.html"><img src="../Photos/sales-resume.png" alt="Sales Resume" /></a>
+    </div>
+  </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>Resume Builder</h3>
+        <p>Build beautiful, job-winning resumes in minutes.</p>
+      </div>
+
+      <div class="footer-section links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Resume Templates</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Learn</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section contact">
+        <h4>Contact Us</h4>
+        <p>Email: rowin9759@gmail.com</p>
+        <p>Phone: +91-10000000</p>
+        <div class="socials">
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Resume Builder. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
