@@ -1,0 +1,209 @@
+<link rel="stylesheet" href="../NeW/Home.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> 
+<style>
+
+    .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    margin-top: 20px;
+    border-radius: 8px;
+    max-width: calc(100% - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.learn-section {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    line-height: 1.8;
+    color: #333;
+}
+
+.learn-section h2 {
+    font-size: 32px;
+    color: #00c08b;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.learn-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background-color: #5e3bee;
+    border-radius: 2px;
+}
+
+.learn-section .section-intro {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 35px;
+    color: #555;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.learn-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 30px;
+}
+
+.learn-section ul li {
+    font-size: 17px;
+    margin-bottom: 25px;
+    padding-left: 45px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.learn-section ul li i {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    font-size: 24px;
+    color: #00c08b;
+    width: 35px;
+    text-align: center;
+}
+
+.learn-section ul li strong {
+    color: #5e3bee;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    background: linear-gradient(45deg, #956b50, #7c724a);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    transition: all 0.4s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+.cta-button:hover {
+    background: linear-gradient(45deg, #b2a87e, #ff6600);
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 102, 0, 0.4);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+.cta-button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.cta-button:focus {
+    outline: none;
+    box-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
+    border: 2px solid #ff6600;
+}
+
+.cta-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.6);
+}
+
+.cta-button:active::before {
+    background-color: #ff6600;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+</style>
+<nav class="navbar">
+  <div class="left">
+    <strong class="logo">Resume Build</strong>
+    <a href="template.html">Resume</a>
+    <a href="../bar/About.html">About</a>
+    <a href="../bar/learn.html">Learn</a>
+  </div>
+  <div class="right">
+    <a href="../loginandSingup/Login_page.html"><button class="sign-in">Sign In</button></a>
+    <a href="../loginandSingup/New_user.html"><button class="get-started">Get Started</button></a>
+  </div>
+</nav>
+
+<section id="learn" class="learn-section">
+  <h2>Learn How to Build Your Resume</h2>
+  <p class="section-intro">Master the art of resume creation with our comprehensive guides and expert tips. Whether you're a beginner or looking to refine your existing resume, we've got you covered.</p>
+  
+  <ul>
+    <li>
+      <i class="fas fa-lightbulb"></i> <strong>Step-by-step Tutorial:</strong> Our easy-to-follow guide walks you through every section, ensuring you fill in your details correctly and make your resume professional and impactful.
+    </li>
+    
+    <li>
+      <i class="fas fa-comments"></i>
+      <strong>Resume Tips from Experts:</strong> Get invaluable advice on what recruiters actively search for, common pitfalls to avoid, and how to effectively highlight your unique strengths and achievements.
+    </li>
+
+    <li>
+      <i class="fas fa-palette"></i>
+      <strong>Template Guide:</strong> Unsure which design suits you? Understand the nuances of our diverse resume templates and learn which style best fits your industry, career level, and personal brand.
+    </li>
+
+    <li>
+      <i class="fas fa-ruler-combined"></i>
+      <strong>Formatting & Layout Help:</strong> Learn the best practices for organizing content for maximum readability, ensuring proper spacing, clear headings, and a professional overall presentation.
+    </li>
+
+    <li>
+      <i class="fas fa-thumbs-up"></i>
+      <strong>Resume Do's and Don'ts:</strong> Discover common resume mistakes that could cost you an interview, and learn the essential best practices that will make your application stand out positively.
+    </li>
+
+    <li>
+      <i class="fas fa-bullseye"></i>
+      <strong>Keywords & ATS Optimization:</strong> Understand how to integrate relevant keywords and structure your resume to pass Applicant Tracking Systems (ATS) and get seen by hiring managers.
+    </li>
+  </ul>
+  <div class="button-container">
+    <a href="../NeW/template.html" class="cta-button">Start Building Now!</a>
+  </div>
+</section>
